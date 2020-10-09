@@ -1,4 +1,7 @@
-# build
+C++ code to Run the [Object Detector](https://github.com/tyui592/Real_Time_Helmet_Detection)
+==
+
+# Build
 
 ```bash
 $ mkdir build
