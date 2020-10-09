@@ -15,3 +15,7 @@ build$ cmake --build . --config Release
 ```bash
 build$ ./main -m <model_path> -i <image_path>
 ```
+
+# TODO
+- [ ] Make docker file
+- [ ] Video Detection
