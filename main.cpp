@@ -90,7 +90,11 @@ int main(int argc, const char** argv){
             pt2.x = box_accessor[i][2];
             pt2.y = box_accessor[i][3];
 
-            cv::rectangle(image, pt1, pt2, cv::Scalar(255, 255, 0), 2);
+            if (cls_accessor[i] == 0)
+                cv::rectangle(image, pt1, pt2, cv::Scalar(0, 0, 255), 1);
+            else
+                cv::rectangle(image, pt1, pt2, cv::Scalar(0, 255, 0), 1);
+
             std::cout << "index: " << i
                       << ", xmin: " << pt1.x
                       << ", ymin: " << pt1.y
