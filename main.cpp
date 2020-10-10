@@ -58,16 +58,14 @@ int main(int argc, const char** argv){
         // forward
         // The first forwarding usually takes a long time, so forward twice to measure speed.
         auto output = model.forward({tensor}).toTuple()->elements();
-        auto start = std::chrono::high_resolution_clock::now();
-        output = model.forward({tensor}).toTuple()->elements();
-        auto stop = std::chrono::high_resolution_clock::now();
+        auto start  = std::chrono::high_resolution_clock::now();
+        output      = model.forward({tensor}).toTuple()->elements();
+        auto stop   = std::chrono::high_resolution_clock::now();
 
         // measure speed
         std::chrono::duration<double> duration = stop - start;
         std::cout << "Inference Time: " << duration.count() * 1000 << "(ms)" << std::endl;
 
-        // print prediction results
-        std::cout << "Prediction Result(box, class, score)" << std::endl;
         auto box   = output[0].toTensor().to(torch::kCPU);
         auto cls   = output[1].toTensor().to(torch::kCPU);
         auto score = output[2].toTensor().to(torch::kCPU);
@@ -81,6 +79,8 @@ int main(int argc, const char** argv){
         cv::cvtColor(image, image, cv::COLOR_RGB2BGR);
         // float to uint8
         image.convertTo(image, CV_8UC3, 255);
+
+        std::cout << "Prediction Result(box, class, score)" << std::endl;
         for (int i =0; i < box_accessor.size(0); i++){
             cv::Point pt1{};
             cv::Point pt2{};
@@ -95,6 +95,7 @@ int main(int argc, const char** argv){
             else
                 cv::rectangle(image, pt1, pt2, cv::Scalar(0, 255, 0), 1);
 
+            // print prediction results
             std::cout << "index: " << i
                       << ", xmin: " << pt1.x
                       << ", ymin: " << pt1.y
