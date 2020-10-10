@@ -1,4 +1,4 @@
-C++ Code fro Loading a TorchScript Model
+C++ Code to Load a TorchScript Model
 ==
 This is c++ implementation to load a torchscript [object detector](https://github.com/tyui592/Real_Time_Helmet_Detection).
 
